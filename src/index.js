@@ -9,7 +9,7 @@ import App from "./App";
 import theme from "./mui/theme";
 
 const client = new ApolloClient({
-  uri: "https://api-us-east-1-shared-usea1-02.hygraph.com/v2/clvomu0sm0m7007wht67xfh8s/master",
+  uri:process.env.REACT_APP_GRAPHCMS_URI,
   cache: new InMemoryCache(),
 });
 
