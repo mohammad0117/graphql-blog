@@ -3,10 +3,11 @@ import React from "react";
 import { GET_AUTHORS_INFO } from "../graphql/queries";
 import { Avatar, Divider, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import Loader from "../shared/Loader";
 function Authors() {
   const { loading, data, errors } = useQuery(GET_AUTHORS_INFO);
   const { authors } = data;
-  if (loading) return <h1>Loading</h1>;
+  if (loading) return <Loader/>;
   if (errors) return <h2>Errors</h2>;
   return (
     <Grid container sx={{ boxShadow: "rgba(0,0,0,0.1) 0 4px 12px", borderRadius: 4 }}>

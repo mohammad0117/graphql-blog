@@ -5,13 +5,16 @@ import { GET_AUTHOR_INFO } from "../graphql/queries";
 import { Avatar, Container, Grid, Typography } from "@mui/material";
 import sanitizeHtml from "sanitize-html";
 import CardEL from "../shared/CardEL";
+import Loader from "../shared/Loader";
 
 function AuthorPage() {
   const { slug } = useParams();
   const { loading, data, errors } = useQuery(GET_AUTHOR_INFO, { variables: { slug } });
-  if (loading) return <h1>Loading</h1>;
+  if (loading) return <Loader />;
   if (errors) return <h2>Errors</h2>;
-  const { author:{name,field,avatar,description,posts} } = data;
+  const {
+    author: { name, field, avatar, description, posts },
+  } = data;
   return (
     <Container maxWidth="lg">
       <Grid container mt={10}>
@@ -31,10 +34,12 @@ function AuthorPage() {
           <Typography component="h3" variant="h5" fontWeight={700}>
             مقالات {name}
           </Typography>
-          <Grid container spacing={2} mt={2} >
-            {posts?.map((post) => (<Grid item xs={12} sm={6} md={4} key={post.id}>
+          <Grid container spacing={2} mt={2}>
+            {posts?.map((post) => (
+              <Grid item xs={12} sm={6} md={4} key={post.id}>
                 <CardEL title={post.title} slug={post.slug} coverPhoto={post.coverPhoto} />
-              </Grid>))}
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </Grid>
