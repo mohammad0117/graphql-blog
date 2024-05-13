@@ -8,6 +8,7 @@ import sanitizeHtml from "sanitize-html";
 import { GET_POST_INFO } from "../graphql/queries";
 import Loader from "../shared/Loader";
 import CommentForm from "../components/layout/comment/CommentForm";
+import Comments from "../components/layout/comment/Comments";
 
 function BlogPage() {
   const { slug } = useParams();
@@ -15,7 +16,6 @@ function BlogPage() {
   const { loading, data, errors } = useQuery(GET_POST_INFO, { variables: { slug } });
   if (loading) return <Loader />;
   if (errors) return <h2>Errors</h2>;
-  console.log(data);
   return (
     <Container maxWidth="lg">
       <Grid container>
@@ -44,6 +44,9 @@ function BlogPage() {
         </Grid>
         <Grid item xs={12}>
           <CommentForm slug={slug} />
+        </Grid>
+        <Grid item xs={12}>
+          <Comments slug={slug} />
         </Grid>
       </Grid>
     </Container>
